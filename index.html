@@ -38,10 +38,18 @@
   }
   nav a:hover { color: var(--blue); border-color: var(--blue); }
   .header-cta { display: flex; align-items: center; gap: 14px; }
-  .tel-link { text-decoration: none; color: var(--blue); font-weight: 700; font-size: 15px; white-space: nowrap; }
+  .tel-link {
+    text-decoration: none; white-space: nowrap;
+    display: flex; align-items: center; gap: 8px;
+    background: var(--blue); color: white;
+    padding: 12px 24px; border-radius: 8px;
+    font-size: 18px; font-weight: 900; letter-spacing: -.3px;
+    box-shadow: 0 4px 14px rgba(26,79,160,.35); transition: all .2s;
+  }
+  .tel-link:hover { background: var(--blue-dark); transform: translateY(-1px); }
   .btn-quote {
-    background: var(--accent); color: white; border: none; padding: 11px 22px;
-    border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; white-space: nowrap;
+    background: var(--accent); color: white; border: none; padding: 12px 22px;
+    border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; white-space: nowrap;
   }
 
   /* ── 히어로 ── */
@@ -101,6 +109,30 @@
   .stat-card .num { font-size: 40px; font-weight: 900; color: white; letter-spacing: -1.5px; line-height: 1; }
   .stat-card .num span { font-size: 22px; font-weight: 700; }
   .stat-card .label { font-size: 14px; color: rgba(255,255,255,.82); margin-top: 8px; font-weight: 600; }
+
+  /* 무료 관리진단 배너 */
+  .diag-banner {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: linear-gradient(135deg, #f5a623, #e8891a);
+    color: white; text-decoration: none;
+    padding: 16px 28px; border-radius: 12px;
+    margin-bottom: 0; margin-top: 24px;
+    font-size: 18px; font-weight: 800;
+    box-shadow: 0 6px 24px rgba(245,166,35,.45);
+    transition: all .2s; letter-spacing: -.3px;
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  .diag-banner:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(245,166,35,.6); }
+  .diag-badge {
+    background: white; color: #e8891a;
+    font-size: 13px; font-weight: 900; padding: 3px 10px; border-radius: 20px;
+  }
+  .diag-text { font-size: 17px; }
+  .diag-arrow { font-size: 20px; }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 6px 24px rgba(245,166,35,.45); }
+    50% { box-shadow: 0 6px 36px rgba(245,166,35,.75); }
+  }
 
   /* 유튜브 영역 */
   .hero-video { position: relative; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,.35); cursor: pointer; display: block; text-decoration: none; }
@@ -353,16 +385,36 @@
     border-top: 1px solid rgba(255,255,255,.08); font-size: 12px; text-align: center;
   }
 
-  /* ── 플로팅 ── */
+  /* ── PC 플로팅 ── */
   .floating-cta { position: fixed; bottom: 30px; right: 30px; z-index: 999; display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
   .fcta-btn {
-    display: flex; align-items: center; gap: 10px; padding: 14px 20px;
+    display: flex; align-items: center; gap: 10px; padding: 14px 22px;
     border-radius: 50px; font-size: 15px; font-weight: 700; text-decoration: none;
     box-shadow: 0 4px 16px rgba(0,0,0,.2); transition: all .2s;
   }
   .fcta-btn:hover { transform: translateY(-3px); }
   .fcta-call { background: var(--blue); color: white; }
-  .fcta-kakao { background: #fee500; color: #3a1d1d; }
+  .fcta-kakao { background: var(--accent); color: white; }
+  .fcta-change { background: #1a7a50; color: white; }
+
+  /* ── 모바일 하단 고정 바 ── */
+  .mobile-bottom-bar {
+    display: none;
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 1100;
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    box-shadow: 0 -4px 20px rgba(0,0,0,.18);
+  }
+  .mbb-call, .mbb-quote {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 12px 8px; text-decoration: none; gap: 2px;
+  }
+  .mbb-call { background: var(--blue); color: white; }
+  .mbb-quote { background: var(--accent); color: white; }
+  .mbb-icon { font-size: 20px; line-height: 1; }
+  .mbb-label { font-size: 14px; font-weight: 900; line-height: 1.2; }
+  .mbb-num { font-size: 15px; font-weight: 900; letter-spacing: -.3px; }
+  .mbb-sub { font-size: 11px; opacity: .9; }
 
   /* ── 반응형 ── */
   @media (max-width: 1100px) {
@@ -382,9 +434,19 @@
     .cases-grid { grid-template-columns: 1fr; }
     .features-grid { grid-template-columns: 1fr; }
     .contact-grid { grid-template-columns: 1fr; }
-    .hero-text h1 { font-size: 30px; }
+    .hero-text h1 { font-size: 28px; }
     .form-row { grid-template-columns: 1fr; }
     .equip-grid { grid-template-columns: 1fr 1fr; }
+    /* 모바일: PC 플로팅 숨기고 하단 바 표시 */
+    #pc-float { display: none !important; }
+    .mobile-bottom-bar { display: grid !important; }
+    /* 모바일: 하단 바 높이만큼 여백 */
+    body { padding-bottom: 72px; }
+    /* 헤더 전화 버튼 크기 줄이기 */
+    .tel-link { font-size: 15px; padding: 10px 16px; }
+    .header-inner { height: 110px; }
+    #hero { margin-top: 110px; }
+    .diag-banner { font-size: 15px; padding: 13px 20px; }
   }
 </style>
 </head>
@@ -419,11 +481,17 @@
     <!-- 왼쪽: 텍스트 -->
     <div class="hero-text">
       <div class="hero-badge">🏆 자산·시설관리 분야 8년 연속 1위</div>
-      <h1>관리비는 <span>다운</span>,<br>품질은 <span>업</span></h1>
-      <p>1998년 창업 이래 25년간 축적한 집합건물관리 전문 노하우로 전국 130여 개 건물을 투명하고 체계적으로 관리합니다.</p>
-      <div class="hero-btns">
-        <a class="btn-primary" href="#contact">무료 견적 받기</a>
-        <a class="btn-outline" href="#cases">해결사례 보기</a>
+      <h1>관리비·민원·시설 문제를<br>줄이는 <span>건물종합관리</span><br>전문회사</h1>
+      <p>상가·오피스텔·빌딩·지식산업센터<br>관리회사 교체 상담</p>
+      <!-- 무료 관리진단 배너 -->
+      <a href="#contact" class="diag-banner">
+        <span class="diag-badge">무료</span>
+        <span class="diag-text">관리진단 요청하기</span>
+        <span class="diag-arrow">→</span>
+      </a>
+      <div class="hero-btns" style="margin-top:20px;">
+        <a class="btn-primary" href="#contact">견적문의</a>
+        <a class="btn-outline" href="#contact">관리회사 교체 상담</a>
       </div>
     </div>
     <!-- 오른쪽: 유튜브 썸네일 (클릭 시 유튜브 이동) -->
@@ -817,134 +885,6 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- 장비보유현황 -->
-<!-- ═══════════════════════════════════════════ -->
-<section id="equipment">
-  <div class="section-inner">
-    <div class="section-title">
-      <div class="tag">EQUIPMENT</div>
-      <h2>장비보유현황</h2>
-      <p>전문 장비를 자체 보유하여 빠르고 정확한 시설관리 서비스를 제공합니다.</p>
-    </div>
-    <div class="equip-grid">
-
-      <div class="equip-card">
-        <div class="equip-icon">⚡</div>
-        <h3>전기 장비</h3>
-        <div class="equip-count">15<span>종</span></div>
-        <p>전기 계통 점검·수리에 필요한 전문 장비를 자체 보유합니다.</p>
-        <div class="equip-list">
-          <span class="equip-item">절연저항계</span>
-          <span class="equip-item">클램프미터</span>
-          <span class="equip-item">멀티테스터</span>
-          <span class="equip-item">누전탐지기</span>
-          <span class="equip-item">열화상카메라</span>
-          <span class="equip-item">전동공구세트</span>
-        </div>
-      </div>
-
-      <div class="equip-card">
-        <div class="equip-icon">🔥</div>
-        <h3>소방 장비</h3>
-        <div class="equip-count">12<span>종</span></div>
-        <p>소방시설 점검·유지보수를 위한 인증 소방 장비를 보유합니다.</p>
-        <div class="equip-list">
-          <span class="equip-item">종합경보시험기</span>
-          <span class="equip-item">방수압력계</span>
-          <span class="equip-item">감지기시험기</span>
-          <span class="equip-item">소화기충전기</span>
-          <span class="equip-item">스프링클러점검기</span>
-        </div>
-      </div>
-
-      <div class="equip-card">
-        <div class="equip-icon">🔧</div>
-        <h3>기계·배관 장비</h3>
-        <div class="equip-count">20<span>종</span></div>
-        <p>배관·공조·기계 설비 점검 및 수리를 위한 전문 장비입니다.</p>
-        <div class="equip-list">
-          <span class="equip-item">누수탐지기</span>
-          <span class="equip-item">배관카메라</span>
-          <span class="equip-item">관통드릴세트</span>
-          <span class="equip-item">용접기</span>
-          <span class="equip-item">압력게이지</span>
-          <span class="equip-item">고압세척기</span>
-        </div>
-      </div>
-
-      <div class="equip-card">
-        <div class="equip-icon">🚗</div>
-        <h3>긴급출동 차량</h3>
-        <div class="equip-count">8<span>대</span></div>
-        <p>전국 지사별 긴급출동 전용 차량을 운영하여 신속하게 현장에 출동합니다.</p>
-        <div class="equip-list">
-          <span class="equip-item">1톤 서비스카</span>
-          <span class="equip-item">고소작업차</span>
-          <span class="equip-item">사다리차</span>
-          <span class="equip-item">청소 특장차</span>
-        </div>
-      </div>
-
-      <div class="equip-card">
-        <div class="equip-icon">📷</div>
-        <h3>보안·CCTV 장비</h3>
-        <div class="equip-count">30<span>식+</span></div>
-        <p>계약 시 무상 설치하는 CCTV 및 보안 장비를 충분히 보유합니다.</p>
-        <div class="equip-list">
-          <span class="equip-item">IP카메라</span>
-          <span class="equip-item">NVR/DVR</span>
-          <span class="equip-item">차량인식카메라</span>
-          <span class="equip-item">열화상카메라</span>
-          <span class="equip-item">인터폰</span>
-        </div>
-      </div>
-
-      <div class="equip-card">
-        <div class="equip-icon">🧹</div>
-        <h3>청소·미화 장비</h3>
-        <div class="equip-count">25<span>종</span></div>
-        <p>외벽 청소, 바닥 광택, 소독·방역에 필요한 전문 청소 장비를 보유합니다.</p>
-        <div class="equip-list">
-          <span class="equip-item">로프하강장비</span>
-          <span class="equip-item">스팀청소기</span>
-          <span class="equip-item">산업용흡입기</span>
-          <span class="equip-item">바닥연마기</span>
-          <span class="equip-item">전동분무기</span>
-        </div>
-      </div>
-
-      <div class="equip-card">
-        <div class="equip-icon">🔬</div>
-        <h3>환경·검사 장비</h3>
-        <div class="equip-count">10<span>종</span></div>
-        <p>수질·공기질·소음 등 환경 기준 적합 여부를 자체 측정합니다.</p>
-        <div class="equip-list">
-          <span class="equip-item">수질측정기</span>
-          <span class="equip-item">공기질측정기</span>
-          <span class="equip-item">소음측정기</span>
-          <span class="equip-item">온습도계</span>
-          <span class="equip-item">CO감지기</span>
-        </div>
-      </div>
-
-      <div class="equip-card">
-        <div class="equip-icon">📡</div>
-        <h3>스마트 관리 시스템</h3>
-        <div class="equip-count">전산<span>화</span></div>
-        <p>IoT 기반 원격 모니터링 및 전산 관리 시스템으로 실시간 건물 상태를 파악합니다.</p>
-        <div class="equip-list">
-          <span class="equip-item">원격모니터링</span>
-          <span class="equip-item">스마트미터</span>
-          <span class="equip-item">관리앱</span>
-          <span class="equip-item">자동보고서</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
 <!-- 특장점 -->
 <section id="features">
   <div class="section-inner">
@@ -1131,6 +1071,27 @@
   </div>
 </section>
 
+<!-- 장비보유현황 -->
+<section id="equipment">
+  <div class="section-inner">
+    <div class="section-title">
+      <div class="tag">EQUIPMENT</div>
+      <h2>장비보유현황</h2>
+      <p>전문 장비를 자체 보유하여 빠르고 정확한 시설관리 서비스를 제공합니다.</p>
+    </div>
+    <div class="equip-grid">
+      <div class="equip-card"><div class="equip-icon">⚡</div><h3>전기 장비</h3><div class="equip-count">15<span>종</span></div><p>전기 계통 점검·수리에 필요한 전문 장비를 자체 보유합니다.</p><div class="equip-list"><span class="equip-item">절연저항계</span><span class="equip-item">클램프미터</span><span class="equip-item">멀티테스터</span><span class="equip-item">누전탐지기</span><span class="equip-item">열화상카메라</span><span class="equip-item">전동공구세트</span></div></div>
+      <div class="equip-card"><div class="equip-icon">🔥</div><h3>소방 장비</h3><div class="equip-count">12<span>종</span></div><p>소방시설 점검·유지보수를 위한 인증 소방 장비를 보유합니다.</p><div class="equip-list"><span class="equip-item">종합경보시험기</span><span class="equip-item">방수압력계</span><span class="equip-item">감지기시험기</span><span class="equip-item">소화기충전기</span><span class="equip-item">스프링클러점검기</span></div></div>
+      <div class="equip-card"><div class="equip-icon">🔧</div><h3>기계·배관 장비</h3><div class="equip-count">20<span>종</span></div><p>배관·공조·기계 설비 점검 및 수리를 위한 전문 장비입니다.</p><div class="equip-list"><span class="equip-item">누수탐지기</span><span class="equip-item">배관카메라</span><span class="equip-item">관통드릴세트</span><span class="equip-item">용접기</span><span class="equip-item">압력게이지</span><span class="equip-item">고압세척기</span></div></div>
+      <div class="equip-card"><div class="equip-icon">🚗</div><h3>긴급출동 차량</h3><div class="equip-count">8<span>대</span></div><p>전국 지사별 긴급출동 전용 차량을 운영하여 신속하게 현장에 출동합니다.</p><div class="equip-list"><span class="equip-item">1톤 서비스카</span><span class="equip-item">고소작업차</span><span class="equip-item">사다리차</span><span class="equip-item">청소 특장차</span></div></div>
+      <div class="equip-card"><div class="equip-icon">📷</div><h3>보안·CCTV 장비</h3><div class="equip-count">30<span>식+</span></div><p>계약 시 무상 설치하는 CCTV 및 보안 장비를 충분히 보유합니다.</p><div class="equip-list"><span class="equip-item">IP카메라</span><span class="equip-item">NVR/DVR</span><span class="equip-item">차량인식카메라</span><span class="equip-item">열화상카메라</span><span class="equip-item">인터폰</span></div></div>
+      <div class="equip-card"><div class="equip-icon">🧹</div><h3>청소·미화 장비</h3><div class="equip-count">25<span>종</span></div><p>외벽 청소, 바닥 광택, 소독·방역에 필요한 전문 청소 장비를 보유합니다.</p><div class="equip-list"><span class="equip-item">로프하강장비</span><span class="equip-item">스팀청소기</span><span class="equip-item">산업용흡입기</span><span class="equip-item">바닥연마기</span><span class="equip-item">전동분무기</span></div></div>
+      <div class="equip-card"><div class="equip-icon">🔬</div><h3>환경·검사 장비</h3><div class="equip-count">10<span>종</span></div><p>수질·공기질·소음 등 환경 기준 적합 여부를 자체 측정합니다.</p><div class="equip-list"><span class="equip-item">수질측정기</span><span class="equip-item">공기질측정기</span><span class="equip-item">소음측정기</span><span class="equip-item">온습도계</span><span class="equip-item">CO감지기</span></div></div>
+      <div class="equip-card"><div class="equip-icon">📡</div><h3>스마트 관리 시스템</h3><div class="equip-count">전산<span>화</span></div><p>IoT 기반 원격 모니터링 및 전산 관리 시스템으로 실시간 건물 상태를 파악합니다.</p><div class="equip-list"><span class="equip-item">원격모니터링</span><span class="equip-item">스마트미터</span><span class="equip-item">관리앱</span><span class="equip-item">자동보고서</span></div></div>
+    </div>
+  </div>
+</section>
+
 <!-- 문의 -->
 <section id="contact">
   <div class="section-inner">
@@ -1150,22 +1111,20 @@
         </div>
       </div>
       <div class="contact-form">
-        <h3>📋 온라인 견적 문의</h3>
-        <div class="form-row">
-          <div class="form-group"><label>성함 *</label><input type="text" placeholder="홍길동"></div>
-          <div class="form-group"><label>연락처 *</label><input type="tel" placeholder="010-0000-0000"></div>
-        </div>
+        <h3>📋 무료 관리진단 / 견적문의</h3>
+        <div class="form-group"><label>이름 *</label><input type="text" placeholder="홍길동"></div>
+        <div class="form-group"><label>연락처 *</label><input type="tel" placeholder="010-0000-0000"></div>
         <div class="form-group">
-          <label>건물 유형</label>
+          <label>건물유형</label>
           <select>
             <option value="">선택해주세요</option>
-            <option>소형건물</option><option>상가건물</option><option>원룸건물</option>
-            <option>소형빌딩</option><option>중대형빌딩</option><option>기타상업공간</option>
-            <option>호텔</option><option>아파트</option><option>오피스텔</option>
+            <option>상가건물</option><option>오피스텔</option><option>빌딩</option>
+            <option>지식산업센터</option><option>아파트</option><option>원룸·다세대</option>
+            <option>기타</option>
           </select>
         </div>
-        <div class="form-group"><label>문의 내용</label><textarea placeholder="건물 위치, 규모, 문의 내용을 간략히 적어주세요."></textarea></div>
-        <button class="btn-submit">무료 상담 신청하기 →</button>
+        <div class="form-group"><label>상담내용</label><textarea placeholder="건물 위치, 규모, 현재 불편하신 점 등을 간략히 적어주세요. (관리회사 교체 상담도 가능합니다)"></textarea></div>
+        <button class="btn-submit">무료 관리진단 신청하기 →</button>
       </div>
     </div>
   </div>
@@ -1193,10 +1152,25 @@
   <div class="footer-bottom">© 2024 KAAMS (주)한국자산보증관리. All Rights Reserved.</div>
 </footer>
 
-<!-- 플로팅 -->
-<div class="floating-cta">
+<!-- PC용 플로팅 (우측 하단) -->
+<div class="floating-cta" id="pc-float">
   <a class="fcta-btn fcta-call" href="tel:15993039">📞 1599-3039 전화상담</a>
-  <a class="fcta-btn fcta-kakao" href="#contact">💬 온라인 문의</a>
+  <a class="fcta-btn fcta-kakao" href="#contact">💬 견적문의</a>
+  <a class="fcta-btn fcta-change" href="#contact">🔄 관리회사 교체 상담</a>
+</div>
+
+<!-- 모바일용 하단 고정 바 (항상 표시) -->
+<div class="mobile-bottom-bar">
+  <a href="tel:15993039" class="mbb-call">
+    <span class="mbb-icon">📞</span>
+    <span class="mbb-label">전화상담</span>
+    <span class="mbb-num">1599-3039</span>
+  </a>
+  <a href="#contact" class="mbb-quote">
+    <span class="mbb-icon">📋</span>
+    <span class="mbb-label">견적문의</span>
+    <span class="mbb-sub">관리회사 교체</span>
+  </a>
 </div>
 
 <script>
