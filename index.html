@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAAMS (주)한국자산보증관리 - 관리비는 다운, 품질은 업</title>
+<style>
+  :root {
+    --blue: #1a4fa0;
+    --blue-dark: #0f3270;
+    --blue-light: #2d6fd6;
+    --accent: #f5a623;
+    --gray: #f5f7fa;
+    --text: #222;
+    --text-light: #666;
+    --white: #fff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Apple SD Gothic Neo', '맑은 고딕', sans-serif; color: var(--text); }
+
+  /* ── 헤더 ── */
+  header {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    background: var(--white); box-shadow: 0 2px 12px rgba(0,0,0,.1);
+  }
+  .header-inner {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 32px; height: 130px;
+  }
+  .logo a { display: flex; align-items: center; text-decoration: none; }
+  .logo img { height: 160px; width: auto; object-fit: contain; max-width: 320px; }
+  nav { display: flex; gap: 32px; }
+  nav a {
+    text-decoration: none; font-size: 15px; font-weight: 600; color: var(--text);
+    padding: 4px 0; border-bottom: 2px solid transparent; transition: all .2s; white-space: nowrap;
+  }
+  nav a:hover { color: var(--blue); border-color: var(--blue); }
+  .header-cta { display: flex; align-items: center; gap: 14px; }
+  .tel-link { text-decoration: none; color: var(--blue); font-weight: 700; font-size: 15px; white-space: nowrap; }
+  .btn-quote {
+    background: var(--accent); color: white; border: none; padding: 11px 22px;
+    border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; white-space: nowrap;
+  }
+
+  /* ── 히어로 ── */
+  #hero {
+    margin-top: 130px;
+    background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 60%, var(--blue-light) 100%);
+    position: relative; overflow: hidden;
+  }
+  #hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  /* 상단: 텍스트 + 영상 */
+  .hero-inner {
+    max-width: 1280px; margin: 0 auto; padding: 56px 48px 40px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    position: relative; z-index: 1; width: 100%;
+  }
+  /* 하단: 수치 카드 */
+  .hero-stats-row {
+    max-width: 1280px; margin: 0 auto; padding: 0 48px 52px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    position: relative; z-index: 1;
+  }
+  .hero-text { color: white; }
+  .hero-badge {
+    display: inline-block; background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3);
+    color: white; font-size: 14px; font-weight: 700; padding: 7px 16px; border-radius: 20px; margin-bottom: 22px;
+  }
+  .hero-text h1 {
+    font-size: 54px; font-weight: 900; line-height: 1.15; margin-bottom: 18px;
+    letter-spacing: -1.5px; word-break: keep-all;
+  }
+  .hero-text h1 span { color: var(--accent); }
+  .hero-text p {
+    font-size: 18px; opacity: .9; line-height: 1.8; margin-bottom: 32px;
+    word-break: keep-all; font-weight: 500;
+  }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent); color: white; padding: 15px 34px; border-radius: 8px;
+    font-size: 16px; font-weight: 800; text-decoration: none; transition: all .2s; letter-spacing: -.3px;
+  }
+  .btn-primary:hover { background: #d4891a; transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: white; padding: 15px 34px; border-radius: 8px;
+    font-size: 16px; font-weight: 800; text-decoration: none; border: 2px solid rgba(255,255,255,.6);
+    transition: all .2s; letter-spacing: -.3px;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,.1); }
+  .stat-card {
+    background: rgba(255,255,255,.13); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,.22); border-radius: 14px;
+    padding: 20px 24px; text-align: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .stat-card .num { font-size: 40px; font-weight: 900; color: white; letter-spacing: -1.5px; line-height: 1; }
+  .stat-card .num span { font-size: 22px; font-weight: 700; }
+  .stat-card .label { font-size: 14px; color: rgba(255,255,255,.82); margin-top: 8px; font-weight: 600; }
+
+  /* 유튜브 영역 */
+  .hero-video { position: relative; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,.35); cursor: pointer; display: block; text-decoration: none; }
+  .hero-video img { display: block; width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+  .hero-video .play-overlay {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: rgba(0,0,0,.35); transition: background .3s;
+  }
+  .hero-video:hover .play-overlay { background: rgba(0,0,0,.2); }
+  .play-btn {
+    width: 72px; height: 72px; background: rgba(255,255,255,.95); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+    box-shadow: 0 4px 24px rgba(0,0,0,.3); transition: transform .3s;
+  }
+  .hero-video:hover .play-btn { transform: scale(1.12); }
+  .play-btn svg { margin-left: 5px; }
+  .play-label { color: white; font-size: 15px; font-weight: 700; letter-spacing: .5px; text-shadow: 0 1px 4px rgba(0,0,0,.5); }
+  .yt-badge {
+    position: absolute; bottom: 14px; right: 14px;
+    background: rgba(0,0,0,.7); color: white; font-size: 12px; font-weight: 600;
+    padding: 4px 10px; border-radius: 6px; display: flex; align-items: center; gap: 5px;
+  }
+
+  /* ── 섹션 공통 ── */
+  section { padding: 80px 24px; }
+  .section-inner { max-width: 1280px; margin: 0 auto; }
+  .section-title { text-align: center; margin-bottom: 56px; }
+  .section-title .tag {
+    display: inline-block; background: #e8f0fe; color: var(--blue);
+    font-size: 13px; font-weight: 700; padding: 4px 14px; border-radius: 20px; margin-bottom: 12px;
+  }
+  .section-title h2 { font-size: 34px; font-weight: 800; }
+  .section-title p { color: var(--text-light); margin-top: 12px; font-size: 16px; line-height: 1.7; }
+
+  /* ── 서비스 소개 ── */
+  #services { background: var(--gray); }
+  .services-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+  .service-card {
+    background: white; border-radius: 16px; overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,.06); transition: all .3s;
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(26,79,160,.18); }
+  .service-img {
+    height: 180px; display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .service-img.c1 { background: linear-gradient(150deg, #dce8fb 0%, #eef4ff 100%); }
+  .service-img.c2 { background: linear-gradient(150deg, #d4f0e4 0%, #edfaf3 100%); }
+  .service-img.c3 { background: linear-gradient(150deg, #e0d8f8 0%, #f0ecff 100%); }
+  .service-img.c4 { background: linear-gradient(150deg, #fce4d6 0%, #fff3ee 100%); }
+  .service-img.c5 { background: linear-gradient(150deg, #d6eef8 0%, #eef8ff 100%); }
+  .service-img svg { filter: drop-shadow(0 6px 16px rgba(0,0,0,.10)); }
+  .service-body { padding: 20px; }
+  .service-body h3 { font-size: 16px; font-weight: 800; margin-bottom: 10px; color: var(--blue-dark); }
+  .service-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .service-tag {
+    font-size: 12px; padding: 3px 9px; border-radius: 20px;
+    background: #e8f0fe; color: var(--blue); font-weight: 600;
+  }
+
+  /* ── 관리 대상 ── */
+  #targets { background: white; }
+  .targets-grid { display: grid; grid-template-columns: repeat(9, 1fr); gap: 12px; }
+  .target-card {
+    background: var(--gray); border-radius: 14px; padding: 22px 8px; text-align: center;
+    transition: all .3s; cursor: default; border: 2px solid transparent;
+  }
+  .target-card:hover { background: var(--blue); border-color: var(--blue); transform: translateY(-4px); }
+  .target-card:hover h3 { color: white; }
+  .target-card:hover p { color: rgba(255,255,255,.75); }
+  .target-card .t-icon { font-size: 30px; margin-bottom: 10px; }
+  .target-card h3 { font-size: 13px; font-weight: 700; color: var(--text); }
+  .target-card p { font-size: 11px; color: var(--text-light); margin-top: 3px; }
+
+  /* ── 토탈 서비스 ── */
+  #total { background: var(--gray); }
+  .total-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+  .total-card {
+    background: white; border-radius: 16px; padding: 30px 20px; text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,.06); transition: all .3s; position: relative; overflow: hidden;
+  }
+  .total-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--blue), var(--blue-light));
+  }
+  .total-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(26,79,160,.15); }
+  .total-icon {
+    width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 16px;
+    display: flex; align-items: center; justify-content: center; font-size: 28px;
+    background: #e8f0fe;
+  }
+  .total-card h3 { font-size: 15px; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+  .total-card p { font-size: 13px; color: var(--text-light); line-height: 1.65; }
+
+  /* ── 회사소개 ── */
+  #about { background: white; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .about-info h3 { font-size: 28px; font-weight: 800; color: var(--blue-dark); margin-bottom: 20px; line-height: 1.4; }
+  .about-info p { font-size: 15px; color: var(--text-light); line-height: 1.9; margin-bottom: 32px; }
+  .about-badges { display: flex; flex-wrap: wrap; gap: 12px; }
+  .about-badge {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--gray); border-radius: 10px; padding: 12px 18px;
+    font-size: 14px; font-weight: 700; color: var(--blue-dark);
+  }
+  .about-badge .badge-icon { font-size: 20px; }
+
+  /* 연혁 타임라인 */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 8px; top: 8px; bottom: 8px;
+    width: 2px; background: linear-gradient(to bottom, var(--blue), var(--blue-light));
+  }
+  .timeline-item { position: relative; margin-bottom: 28px; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -24px; top: 6px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--blue); border: 2px solid white;
+    box-shadow: 0 0 0 3px var(--blue-light);
+  }
+  .timeline-item .year {
+    font-size: 13px; font-weight: 800; color: var(--blue); margin-bottom: 4px;
+    background: #e8f0fe; display: inline-block; padding: 2px 10px; border-radius: 20px;
+  }
+  .timeline-item h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .timeline-item p { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+
+  /* ── 장비보유현황 ── */
+  #equipment { background: var(--gray); }
+  .equip-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .equip-card {
+    background: white; border-radius: 16px; padding: 28px 20px; text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,.06); transition: all .3s; border-top: 4px solid var(--blue);
+  }
+  .equip-card:hover { transform: translateY(-5px); box-shadow: 0 10px 28px rgba(26,79,160,.13); }
+  .equip-icon { font-size: 40px; margin-bottom: 14px; }
+  .equip-card h3 { font-size: 16px; font-weight: 800; color: var(--blue-dark); margin-bottom: 8px; }
+  .equip-card .equip-count { font-size: 28px; font-weight: 900; color: var(--blue); margin-bottom: 6px; }
+  .equip-card .equip-count span { font-size: 16px; }
+  .equip-card p { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+  .equip-list { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; }
+  .equip-item { font-size: 11px; padding: 2px 8px; background: #e8f0fe; color: var(--blue); border-radius: 20px; font-weight: 600; }
+
+  /* ── 특장점 ── */
+  #features { background: white; }
+  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .feature-item { display: flex; gap: 18px; align-items: flex-start; }
+  .feature-num {
+    min-width: 48px; height: 48px; background: var(--blue); color: white;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 800; flex-shrink: 0;
+  }
+  .feature-item h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+  .feature-item p { font-size: 14px; color: var(--text-light); line-height: 1.65; }
+
+  /* ── 해결사례 ── */
+  #cases { background: var(--gray); }
+  .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .case-card { border: 1px solid #e8edf5; border-radius: 14px; overflow: hidden; transition: all .3s; background: white; }
+  .case-card:hover { box-shadow: 0 8px 28px rgba(26,79,160,.12); transform: translateY(-4px); }
+  .case-header { background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%); padding: 20px 24px; color: white; }
+  .case-num { font-size: 12px; opacity: .7; margin-bottom: 4px; }
+  .case-header h3 { font-size: 16px; font-weight: 700; }
+  .case-body { padding: 20px 24px; }
+  .case-body p { font-size: 14px; color: var(--text-light); line-height: 1.7; }
+  .case-result { margin-top: 14px; padding: 10px 14px; background: #e8f0fe; border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--blue); }
+
+  /* ── 지사 현황 ── */
+  #branches { background: var(--blue-dark); color: white; }
+  #branches .section-title h2 { color: white; }
+  #branches .section-title p { color: rgba(255,255,255,.6); }
+  #branches .section-title .tag { background: rgba(255,255,255,.1); color: rgba(255,255,255,.8); }
+  .branches-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+  .branch-card {
+    background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12);
+    border-radius: 14px; padding: 24px 16px; text-align: center; transition: all .3s;
+  }
+  .branch-card:hover { background: rgba(255,255,255,.15); }
+  .branch-card .b-icon { font-size: 28px; margin-bottom: 10px; }
+  .branch-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .branch-card p { font-size: 12px; color: rgba(255,255,255,.6); line-height: 1.5; }
+
+  /* ── 문의 ── */
+  #contact { background: var(--gray); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .contact-info h3 { font-size: 26px; font-weight: 800; margin-bottom: 16px; }
+  .contact-info p { font-size: 15px; color: var(--text-light); line-height: 1.8; margin-bottom: 28px; }
+  .contact-items { display: flex; flex-direction: column; gap: 14px; }
+  .contact-item { display: flex; gap: 14px; align-items: center; }
+  .contact-item .ci-icon {
+    width: 44px; height: 44px; background: var(--blue); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;
+  }
+  .contact-item .ci-text .label { font-size: 12px; color: var(--text-light); }
+  .contact-item .ci-text .val { font-size: 16px; font-weight: 700; }
+  .contact-form { background: white; border-radius: 20px; padding: 36px; box-shadow: 0 4px 20px rgba(0,0,0,.07); }
+  .contact-form h3 { font-size: 20px; font-weight: 700; margin-bottom: 24px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+  .form-group label { font-size: 13px; font-weight: 600; }
+  .form-group input, .form-group select, .form-group textarea {
+    border: 1px solid #dde3ee; border-radius: 8px; padding: 12px 14px;
+    font-size: 14px; font-family: inherit; outline: none; transition: border .2s;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--blue); }
+  .form-group textarea { height: 100px; resize: vertical; }
+  .btn-submit {
+    width: 100%; background: var(--blue); color: white; border: none; padding: 14px;
+    border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; transition: background .2s;
+  }
+  .btn-submit:hover { background: var(--blue-dark); }
+
+  /* ── 푸터 ── */
+  footer { background: #111827; color: rgba(255,255,255,.55); padding: 40px 24px; }
+  .footer-inner {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap;
+  }
+  .footer-logo img { height: 70px; width: auto; filter: brightness(0) invert(1); opacity: .85; }
+  .footer-logo .sub { font-size: 14px; margin-top: 10px; }
+  .footer-info { font-size: 16px; line-height: 2.2; }
+  .footer-info span { color: rgba(255,255,255,.9); font-weight: 700; }
+  .footer-bottom {
+    max-width: 1280px; margin: 24px auto 0; padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,.08); font-size: 12px; text-align: center;
+  }
+
+  /* ── 플로팅 ── */
+  .floating-cta { position: fixed; bottom: 30px; right: 30px; z-index: 999; display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+  .fcta-btn {
+    display: flex; align-items: center; gap: 10px; padding: 14px 20px;
+    border-radius: 50px; font-size: 15px; font-weight: 700; text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0,0,0,.2); transition: all .2s;
+  }
+  .fcta-btn:hover { transform: translateY(-3px); }
+  .fcta-call { background: var(--blue); color: white; }
+  .fcta-kakao { background: #fee500; color: #3a1d1d; }
+
+  /* ── 반응형 ── */
+  @media (max-width: 1100px) {
+    .services-grid { grid-template-columns: repeat(3, 1fr); }
+    .targets-grid { grid-template-columns: repeat(5, 1fr); }
+    .total-grid { grid-template-columns: repeat(3, 1fr); }
+    .equip-grid { grid-template-columns: repeat(2, 1fr); }
+    .branches-grid { grid-template-columns: repeat(3, 1fr); }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+  @media (max-width: 768px) {
+    nav { display: none; }
+    .hero-inner { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .targets-grid { grid-template-columns: repeat(3, 1fr); }
+    .total-grid { grid-template-columns: repeat(2, 1fr); }
+    .cases-grid { grid-template-columns: 1fr; }
+    .features-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .hero-text h1 { font-size: 30px; }
+    .form-row { grid-template-columns: 1fr; }
+    .equip-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 헤더 -->
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <a href="#">
+        <img src="images/logo.png" alt="KAAMS (주)한국자산보증관리">
+      </a>
+    </div>
+    <nav>
+      <a href="#services">서비스소개</a>
+      <a href="#targets">관리대상</a>
+      <a href="#about">회사소개</a>
+      <a href="#equipment">장비현황</a>
+      <a href="#cases">해결사례</a>
+      <a href="#contact">문의하기</a>
+    </nav>
+    <div class="header-cta">
+      <a class="tel-link" href="tel:15993039">📞 1599-3039</a>
+      <a class="btn-quote" href="#contact">무료상담 신청</a>
+    </div>
+  </div>
+</header>
+
+<!-- 히어로 -->
+<section id="hero">
+  <div class="hero-inner">
+    <!-- 왼쪽: 텍스트 -->
+    <div class="hero-text">
+      <div class="hero-badge">🏆 자산·시설관리 분야 8년 연속 1위</div>
+      <h1>관리비는 <span>다운</span>,<br>품질은 <span>업</span></h1>
+      <p>1998년 창업 이래 25년간 축적한 집합건물관리 전문 노하우로 전국 130여 개 건물을 투명하고 체계적으로 관리합니다.</p>
+      <div class="hero-btns">
+        <a class="btn-primary" href="#contact">무료 견적 받기</a>
+        <a class="btn-outline" href="#cases">해결사례 보기</a>
+      </div>
+    </div>
+    <!-- 오른쪽: 유튜브 썸네일 (클릭 시 유튜브 이동) -->
+    <a class="hero-video" href="https://www.youtube.com/watch?v=HRtdcUBQmx4" target="_blank" rel="noopener">
+      <img src="https://img.youtube.com/vi/HRtdcUBQmx4/maxresdefault.jpg" alt="KAAMS 회사소개 영상">
+      <div class="play-overlay">
+        <div class="play-btn">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#1a4fa0">
+            <polygon points="5,3 19,12 5,21"/>
+          </svg>
+        </div>
+        <span class="play-label">KAAMS 회사소개 영상 보기</span>
+      </div>
+      <div class="yt-badge">
+        <svg width="16" height="12" viewBox="0 0 24 17" fill="#ff0000"><path d="M23.5 2.5S23.2.7 22.4 0C21.4-1 20.3-1 19.8-1 16.5-1.2 12-1.2 12-1.2S7.5-1.2 4.2-1C3.7-1 2.6-1 1.6 0 .8.7.5 2.5.5 2.5S.2 4.6.2 6.7v2C.2 10.8.5 12.9.5 12.9S.8 14.7 1.6 15.4c1 1 2.3.9 2.9 1C6.5 16.6 12 16.6 12 16.6s4.5 0 7.8-.2c.5 0 1.6-.1 2.6-1 .8-.7 1.1-2.5 1.1-2.5s.3-2.1.3-4.2v-2C23.8 4.6 23.5 2.5 23.5 2.5zM9.7 11.5V5l6.6 3.3-6.6 3.2z"/></svg>
+        YouTube
+      </div>
+    </a>
+  </div>
+  <!-- 수치 카드: 전체 폭 하단 -->
+  <div class="hero-stats-row">
+    <div class="stat-card">
+      <div class="num">25<span>년+</span></div>
+      <div class="label">경력</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">130<span>개+</span></div>
+      <div class="label">관리 건물</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">8<span>년</span></div>
+      <div class="label">연속 1위</div>
+    </div>
+  </div>
+</section>
+
+<!-- 서비스 소개 -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-title">
+      <div class="tag">SERVICE</div>
+      <h2>KAAMS 서비스 소개</h2>
+      <p>건물 운영에 필요한 모든 서비스를 하나의 파트너사로 해결하세요.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-img c1">
+          <svg width="90" height="90" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="46" width="20" height="34" rx="2" fill="#6baed6" opacity=".7"/>
+            <rect x="9" y="51" width="5" height="6" rx="1" fill="white" opacity=".8"/>
+            <rect x="16" y="51" width="5" height="6" rx="1" fill="white" opacity=".8"/>
+            <rect x="9" y="61" width="5" height="6" rx="1" fill="white" opacity=".8"/>
+            <rect x="16" y="61" width="5" height="6" rx="1" fill="white" opacity=".8"/>
+            <rect x="28" y="18" width="34" height="62" rx="3" fill="#1a4fa0"/>
+            <rect x="32" y="24" width="7" height="8" rx="1" fill="white" opacity=".75"/>
+            <rect x="42" y="24" width="7" height="8" rx="1" fill="white" opacity=".75"/>
+            <rect x="52" y="24" width="5" height="8" rx="1" fill="white" opacity=".75"/>
+            <rect x="32" y="37" width="7" height="8" rx="1" fill="white" opacity=".75"/>
+            <rect x="42" y="37" width="7" height="8" rx="1" fill="white" opacity=".75"/>
+            <rect x="52" y="37" width="5" height="8" rx="1" fill="white" opacity=".75"/>
+            <rect x="32" y="50" width="7" height="8" rx="1" fill="white" opacity=".75"/>
+            <rect x="42" y="50" width="7" height="8" rx="1" fill="white" opacity=".75"/>
+            <rect x="52" y="50" width="5" height="8" rx="1" fill="white" opacity=".75"/>
+            <rect x="39" y="63" width="12" height="17" rx="1" fill="white" opacity=".5"/>
+            <rect x="64" y="34" width="20" height="46" rx="2" fill="#4a90d9" opacity=".8"/>
+            <rect x="67" y="39" width="5" height="6" rx="1" fill="white" opacity=".8"/>
+            <rect x="75" y="39" width="5" height="6" rx="1" fill="white" opacity=".8"/>
+            <rect x="67" y="50" width="5" height="6" rx="1" fill="white" opacity=".8"/>
+            <rect x="75" y="50" width="5" height="6" rx="1" fill="white" opacity=".8"/>
+            <line x1="4" y1="82" x2="86" y2="82" stroke="#1a4fa0" stroke-width="2.5" stroke-linecap="round" opacity=".3"/>
+          </svg>
+        </div>
+        <div class="service-body">
+          <h3>건물종합관리</h3>
+          <div class="service-tags">
+            <span class="service-tag">행정관리</span><span class="service-tag">시설관리</span>
+            <span class="service-tag">보안·경비</span><span class="service-tag">민원처리</span>
+            <span class="service-tag">관리규약 수립</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img c2">
+          <svg width="90" height="90" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="38" cy="38" r="22" fill="none" stroke="#27ae60" stroke-width="5" opacity=".4"/>
+            <circle cx="38" cy="38" r="10" fill="#1a8a5a" opacity=".8"/>
+            <g transform="translate(14,14) rotate(-40,24,24)">
+              <rect x="20" y="8" width="8" height="40" rx="4" fill="#27ae60"/>
+              <circle cx="24" cy="10" r="10" fill="none" stroke="#27ae60" stroke-width="6"/>
+            </g>
+            <polygon points="66,10 58,36 66,36 58,64 76,30 66,30" fill="#f5a623" opacity=".9"/>
+            <circle cx="20" cy="68" r="8" fill="#e74c3c" opacity=".7"/>
+            <text x="20" y="73" text-anchor="middle" font-size="10" fill="white" font-weight="bold">!</text>
+          </svg>
+        </div>
+        <div class="service-body">
+          <h3>시설물유지관리</h3>
+          <div class="service-tags">
+            <span class="service-tag">전기설비</span><span class="service-tag">소방설비</span>
+            <span class="service-tag">승강기</span><span class="service-tag">기계설비</span>
+            <span class="service-tag">긴급출동</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img c3">
+          <svg width="90" height="90" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+            <path d="M45 10 L72 22 L72 46 C72 62 59 74 45 80 C31 74 18 62 18 46 L18 22 Z" fill="#7c5cbf" opacity=".15"/>
+            <path d="M45 16 L66 26 L66 46 C66 59 56 69 45 74 C34 69 24 59 24 46 L24 26 Z" fill="none" stroke="#7c5cbf" stroke-width="4" opacity=".65"/>
+            <polyline points="34,46 43,56 58,36" stroke="#7c5cbf" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="68" y1="20" x2="80" y2="70" stroke="#b45ac5" stroke-width="3.5" stroke-linecap="round" opacity=".55"/>
+            <ellipse cx="78" cy="68" rx="8" ry="4.5" transform="rotate(-15,78,68)" fill="#b45ac5" opacity=".5"/>
+          </svg>
+        </div>
+        <div class="service-body">
+          <h3>경비·미화</h3>
+          <div class="service-tags">
+            <span class="service-tag">전문경비</span><span class="service-tag">주차관리</span>
+            <span class="service-tag">청소관리</span><span class="service-tag">소독방역</span>
+            <span class="service-tag">CCTV설치</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img c4">
+          <svg width="90" height="90" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="22" cy="28" r="11" fill="#e8845a" opacity=".7"/>
+            <path d="M4 68 Q4 50 22 50 Q40 50 40 68" fill="#e8845a" opacity=".45"/>
+            <circle cx="68" cy="28" r="11" fill="#e8845a" opacity=".7"/>
+            <path d="M50 68 Q50 50 68 50 Q86 50 86 68" fill="#e8845a" opacity=".45"/>
+            <circle cx="45" cy="24" r="13" fill="#d4622a"/>
+            <path d="M20 80 Q20 58 45 58 Q70 58 70 80" fill="#d4622a"/>
+            <polygon points="45,6 47,12 53,12 48,16 50,22 45,18 40,22 42,16 37,12 43,12" fill="#f5a623"/>
+          </svg>
+        </div>
+        <div class="service-body">
+          <h3>인재파견</h3>
+          <div class="service-tags">
+            <span class="service-tag">관리소장</span><span class="service-tag">경비원</span>
+            <span class="service-tag">청소원</span><span class="service-tag">기술인력</span>
+            <span class="service-tag">행정인력</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img c5">
+          <svg width="90" height="90" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="45,10 80,40 70,40 70,78 20,78 20,40 10,40" fill="#2980b9" opacity=".12"/>
+            <polygon points="45,14 76,42 66,42 66,74 24,74 24,42 14,42" fill="none" stroke="#2980b9" stroke-width="4" opacity=".65"/>
+            <rect x="37" y="56" width="16" height="18" rx="2" fill="#2980b9" opacity=".7"/>
+            <circle cx="50" cy="65" r="2" fill="white"/>
+            <rect x="28" y="48" width="12" height="10" rx="2" fill="#2980b9" opacity=".5"/>
+            <rect x="50" y="48" width="12" height="10" rx="2" fill="#2980b9" opacity=".5"/>
+            <circle cx="70" cy="26" r="14" fill="#f5a623"/>
+            <text x="70" y="31" text-anchor="middle" font-size="16" font-weight="900" fill="white" font-family="Arial">₩</text>
+          </svg>
+        </div>
+        <div class="service-body">
+          <h3>주택임대관리</h3>
+          <div class="service-tags">
+            <span class="service-tag">공실관리</span><span class="service-tag">임차인모집</span>
+            <span class="service-tag">임대료수납</span><span class="service-tag">계약관리</span>
+            <span class="service-tag">자산수익화</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 관리 대상 -->
+<section id="targets">
+  <div class="section-inner">
+    <div class="section-title">
+      <div class="tag">TARGET</div>
+      <h2>건물종합관리가 필요한 곳</h2>
+      <p>소형 건물부터 대형 복합시설까지 모든 유형의 건물을 전문 관리합니다.</p>
+    </div>
+    <div class="targets-grid">
+      <div class="target-card"><div class="t-icon">🏠</div><h3>소형건물</h3><p>5층 이하</p></div>
+      <div class="target-card"><div class="t-icon">🏪</div><h3>상가건물</h3><p>근린·집합상가</p></div>
+      <div class="target-card"><div class="t-icon">🏘️</div><h3>원룸건물</h3><p>다가구·다세대</p></div>
+      <div class="target-card"><div class="t-icon">🏗️</div><h3>소형빌딩</h3><p>6~10층 규모</p></div>
+      <div class="target-card"><div class="t-icon">🏢</div><h3>중대형빌딩</h3><p>11층 이상</p></div>
+      <div class="target-card"><div class="t-icon">🏬</div><h3>기타상업공간</h3><p>복합·특수시설</p></div>
+      <div class="target-card"><div class="t-icon">🏨</div><h3>호텔</h3><p>숙박시설 전문</p></div>
+      <div class="target-card"><div class="t-icon">🏙️</div><h3>아파트</h3><p>공동주택 관리</p></div>
+      <div class="target-card"><div class="t-icon">🏦</div><h3>오피스텔</h3><p>업무·주거 복합</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 토탈 서비스 -->
+<section id="total">
+  <div class="section-inner">
+    <div class="section-title">
+      <div class="tag">TOTAL SERVICE</div>
+      <h2>건물관리 토탈 서비스</h2>
+      <p>KAAMS 하나로 건물 관리의 모든 것을 해결합니다.</p>
+    </div>
+    <div class="total-grid">
+      <div class="total-card">
+        <div class="total-icon">🔩</div>
+        <h3>시설유지보수</h3>
+        <p>전기·소방·기계·승강기 등 모든 건물 설비를 정기 점검하고 이상 발생 시 즉시 수리합니다.</p>
+      </div>
+      <div class="total-card">
+        <div class="total-icon">📋</div>
+        <h3>실무행정지원</h3>
+        <p>관리비 부과·수납, 회계 투명성 확보, 입주자 대장 관리 등 건물 행정 전반을 지원합니다.</p>
+      </div>
+      <div class="total-card">
+        <div class="total-icon">🧹</div>
+        <h3>미화 및 소독관리</h3>
+        <p>공용 구역 일상 청소부터 외벽 청소, 해충 소독·방역까지 위생적인 환경을 유지합니다.</p>
+      </div>
+      <div class="total-card">
+        <div class="total-icon">🛡️</div>
+        <h3>보안경비관리</h3>
+        <p>전문 경비 인력 배치, CCTV 무상 설치, 주차 관리로 24시간 안전한 건물 환경을 구축합니다.</p>
+      </div>
+      <div class="total-card">
+        <div class="total-icon">📈</div>
+        <h3>부동산 자산관리</h3>
+        <p>공실 최소화, 임대료 최적화, 중장기 자산 보전 계획으로 건물 가치를 극대화합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 회사소개 -->
+<!-- ═══════════════════════════════════════════ -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-title">
+      <div class="tag">ABOUT US</div>
+      <h2>회사소개</h2>
+      <p>1998년 설립 이래 건물관리 한 길만 걸어온 대한민국 대표 자산관리 기업입니다.</p>
+    </div>
+    <div class="about-grid">
+      <!-- 왼쪽: 회사 소개 텍스트 -->
+      <div class="about-info">
+        <h3>"관리비는 다운,<br>품질은 업"<br>그 약속을 지켜왑니다.</h3>
+        <p>
+          (주)한국자산보증관리(KAAMS)는 1998년 창업 이래 집합건물·상업시설·주거시설 전반을 아우르는
+          종합 건물관리 기업으로 성장해 왔습니다.<br><br>
+          투명한 회계, 전문 기술 인력, 24시간 긴급 대응 체계를 바탕으로 현재
+          전국 130여 개 건물을 관리하고 있으며, 자산·시설관리 분야에서 <strong>8년 연속 1위</strong>를
+          달성한 검증된 기업입니다.<br><br>
+          5개 지사(본사·서울·강원·전남·제주) 네트워크를 통해 전국 어디서나 동일한
+          품질의 서비스를 제공합니다.
+        </p>
+        <div class="about-badges">
+          <div class="about-badge"><span class="badge-icon">🏆</span> 8년 연속 분야 1위</div>
+          <div class="about-badge"><span class="badge-icon">📅</span> 1998년 설립 (25년+)</div>
+          <div class="about-badge"><span class="badge-icon">🏢</span> 전국 130개+ 관리</div>
+          <div class="about-badge"><span class="badge-icon">🌐</span> 전국 5개 지사</div>
+          <div class="about-badge"><span class="badge-icon">👷</span> 전문 기술인력 보유</div>
+          <div class="about-badge"><span class="badge-icon">🔍</span> 사업자 215-81-87684</div>
+        </div>
+      </div>
+      <!-- 오른쪽: 연혁 타임라인 -->
+      <div>
+        <h3 style="font-size:22px;font-weight:800;color:var(--blue-dark);margin-bottom:28px;">📌 회사 연혁</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="year">1998년</div>
+            <h4>회사 설립</h4>
+            <p>집합건물 관리 전문 업체로 창업. 서울 서초구 강남대로 사무소 개설.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="year">2002년</div>
+            <h4>법인 전환 및 사업 확장</h4>
+            <p>개인사업자에서 법인으로 전환. 경기·수도권 지역으로 관리 영역 확대.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="year">2008년</div>
+            <h4>강원지사·전남지사 설립</h4>
+            <p>지역 밀착형 서비스 제공을 위해 강원도(원주) 및 전남(여수) 지사 개설.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="year">2013년</div>
+            <h4>본사 이전 (경기 성남 분당)</h4>
+            <p>사업 확장에 따른 본사 이전. 50개 건물 관리 돌파.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="year">2016년</div>
+            <h4>제주지사 설립 / 자산관리 분야 1위 달성</h4>
+            <p>제주도 지사 설립으로 전국 네트워크 완성. 자산·시설관리 분야 1위 인증.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="year">2019년</div>
+            <h4>100개 건물 관리 돌파</h4>
+            <p>누적 관리 건물 100개 달성. 인재파견·임대관리 서비스 본격 시작.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="year">2022년</div>
+            <h4>상호 변경: (주)한국자산보증관리(KAAMS)</h4>
+            <p>기존 (주)엑스뻬제에서 (주)한국자산보증관리로 사명 변경. 브랜드 고도화.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="year">2024년</div>
+            <h4>130개+ 건물 관리 / 8년 연속 1위</h4>
+            <p>전국 130여 개 건물 관리 중. 자산·시설관리 분야 8년 연속 1위 유지.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 장비보유현황 -->
+<!-- ═══════════════════════════════════════════ -->
+<section id="equipment">
+  <div class="section-inner">
+    <div class="section-title">
+      <div class="tag">EQUIPMENT</div>
+      <h2>장비보유현황</h2>
+      <p>전문 장비를 자체 보유하여 빠르고 정확한 시설관리 서비스를 제공합니다.</p>
+    </div>
+    <div class="equip-grid">
+
+      <div class="equip-card">
+        <div class="equip-icon">⚡</div>
+        <h3>전기 장비</h3>
+        <div class="equip-count">15<span>종</span></div>
+        <p>전기 계통 점검·수리에 필요한 전문 장비를 자체 보유합니다.</p>
+        <div class="equip-list">
+          <span class="equip-item">절연저항계</span>
+          <span class="equip-item">클램프미터</span>
+          <span class="equip-item">멀티테스터</span>
+          <span class="equip-item">누전탐지기</span>
+          <span class="equip-item">열화상카메라</span>
+          <span class="equip-item">전동공구세트</span>
+        </div>
+      </div>
+
+      <div class="equip-card">
+        <div class="equip-icon">🔥</div>
+        <h3>소방 장비</h3>
+        <div class="equip-count">12<span>종</span></div>
+        <p>소방시설 점검·유지보수를 위한 인증 소방 장비를 보유합니다.</p>
+        <div class="equip-list">
+          <span class="equip-item">종합경보시험기</span>
+          <span class="equip-item">방수압력계</span>
+          <span class="equip-item">감지기시험기</span>
+          <span class="equip-item">소화기충전기</span>
+          <span class="equip-item">스프링클러점검기</span>
+        </div>
+      </div>
+
+      <div class="equip-card">
+        <div class="equip-icon">🔧</div>
+        <h3>기계·배관 장비</h3>
+        <div class="equip-count">20<span>종</span></div>
+        <p>배관·공조·기계 설비 점검 및 수리를 위한 전문 장비입니다.</p>
+        <div class="equip-list">
+          <span class="equip-item">누수탐지기</span>
+          <span class="equip-item">배관카메라</span>
+          <span class="equip-item">관통드릴세트</span>
+          <span class="equip-item">용접기</span>
+          <span class="equip-item">압력게이지</span>
+          <span class="equip-item">고압세척기</span>
+        </div>
+      </div>
+
+      <div class="equip-card">
+        <div class="equip-icon">🚗</div>
+        <h3>긴급출동 차량</h3>
+        <div class="equip-count">8<span>대</span></div>
+        <p>전국 지사별 긴급출동 전용 차량을 운영하여 신속하게 현장에 출동합니다.</p>
+        <div class="equip-list">
+          <span class="equip-item">1톤 서비스카</span>
+          <span class="equip-item">고소작업차</span>
+          <span class="equip-item">사다리차</span>
+          <span class="equip-item">청소 특장차</span>
+        </div>
+      </div>
+
+      <div class="equip-card">
+        <div class="equip-icon">📷</div>
+        <h3>보안·CCTV 장비</h3>
+        <div class="equip-count">30<span>식+</span></div>
+        <p>계약 시 무상 설치하는 CCTV 및 보안 장비를 충분히 보유합니다.</p>
+        <div class="equip-list">
+          <span class="equip-item">IP카메라</span>
+          <span class="equip-item">NVR/DVR</span>
+          <span class="equip-item">차량인식카메라</span>
+          <span class="equip-item">열화상카메라</span>
+          <span class="equip-item">인터폰</span>
+        </div>
+      </div>
+
+      <div class="equip-card">
+        <div class="equip-icon">🧹</div>
+        <h3>청소·미화 장비</h3>
+        <div class="equip-count">25<span>종</span></div>
+        <p>외벽 청소, 바닥 광택, 소독·방역에 필요한 전문 청소 장비를 보유합니다.</p>
+        <div class="equip-list">
+          <span class="equip-item">로프하강장비</span>
+          <span class="equip-item">스팀청소기</span>
+          <span class="equip-item">산업용흡입기</span>
+          <span class="equip-item">바닥연마기</span>
+          <span class="equip-item">전동분무기</span>
+        </div>
+      </div>
+
+      <div class="equip-card">
+        <div class="equip-icon">🔬</div>
+        <h3>환경·검사 장비</h3>
+        <div class="equip-count">10<span>종</span></div>
+        <p>수질·공기질·소음 등 환경 기준 적합 여부를 자체 측정합니다.</p>
+        <div class="equip-list">
+          <span class="equip-item">수질측정기</span>
+          <span class="equip-item">공기질측정기</span>
+          <span class="equip-item">소음측정기</span>
+          <span class="equip-item">온습도계</span>
+          <span class="equip-item">CO감지기</span>
+        </div>
+      </div>
+
+      <div class="equip-card">
+        <div class="equip-icon">📡</div>
+        <h3>스마트 관리 시스템</h3>
+        <div class="equip-count">전산<span>화</span></div>
+        <p>IoT 기반 원격 모니터링 및 전산 관리 시스템으로 실시간 건물 상태를 파악합니다.</p>
+        <div class="equip-list">
+          <span class="equip-item">원격모니터링</span>
+          <span class="equip-item">스마트미터</span>
+          <span class="equip-item">관리앱</span>
+          <span class="equip-item">자동보고서</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 특장점 -->
+<section id="features">
+  <div class="section-inner">
+    <div class="section-title">
+      <div class="tag">WHY KAAMS</div>
+      <h2>왜 한국자산보증관리인가</h2>
+      <p>25년 노하우와 체계적인 시스템으로 차별화된 서비스를 제공합니다.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-num">01</div>
+        <div><h3>투명한 관리비 운영</h3><p>월별 수입·지출 내역을 전산으로 공개하여 관리비 횡령·비리 없이 투명하게 운영합니다. 절감된 관리비는 적립금으로 환원됩니다.</p></div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">02</div>
+        <div><h3>8년 연속 분야 1위</h3><p>자산·시설관리 분야에서 8년 연속 1위를 달성한 검증된 업체입니다. 수백 개의 실제 관리 사례가 신뢰를 보증합니다.</p></div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">03</div>
+        <div><h3>긴급 상황 24시간 대응</h3><p>누수, 정전, 화재 경보 등 긴급 상황 발생 시 24시간 즉시 현장 출동하여 피해를 최소화합니다.</p></div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">04</div>
+        <div><h3>체계적인 관리 매뉴얼</h3><p>25년간 축적한 노하우를 바탕으로 표준화된 관리 매뉴얼을 운영하여 일관된 고품질 서비스를 보장합니다.</p></div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">05</div>
+        <div><h3>전문 기술 인력 보유</h3><p>전기·소방·건축·기계 분야 자격증 보유 기술 인력이 상주하여 모든 설비 문제를 즉시 처리합니다.</p></div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">06</div>
+        <div><h3>전국 지사 네트워크</h3><p>본사(성남 분당)를 중심으로 서울, 강원, 전남, 제주 지사를 운영하여 전국 어디서나 신속한 서비스가 가능합니다.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 해결사례 -->
+<section id="cases">
+  <div class="section-inner">
+    <div class="section-title">
+      <div class="tag">CASES</div>
+      <h2>실제 해결 사례</h2>
+      <p>한국자산보증관리가 실제로 해결한 대표 사례를 확인하세요.</p>
+    </div>
+    <div class="cases-grid">
+      <div class="case-card">
+        <div class="case-header"><div class="case-num">CASE 01</div><h3>관리비 절감 성공 사례</h3></div>
+        <div class="case-body"><p>기존 관리업체의 불투명한 운영으로 관리비 과다 지출이 발생하던 300세대 아파트를 인수하여 체계적인 비용 관리를 시작했습니다.</p><div class="case-result">✅ 6년간 적립금 약 5억 원 확보</div></div>
+      </div>
+      <div class="case-card">
+        <div class="case-header"><div class="case-num">CASE 02</div><h3>관리단 비리 개선</h3></div>
+        <div class="case-body"><p>전임 관리단의 비리로 혼란을 겪던 집합건물에 투명한 회계 시스템과 적법한 관리규약을 도입하여 정상화하였습니다.</p><div class="case-result">✅ 관리 정상화 및 입주자 신뢰 회복</div></div>
+      </div>
+      <div class="case-card">
+        <div class="case-header"><div class="case-num">CASE 03</div><h3>기계실 긴급 누수 대응</h3></div>
+        <div class="case-body"><p>심야 시간 기계실 배관 누수 발생 시 24시간 긴급 출동 체계로 2시간 내 현장 대응하여 대규모 침수 피해를 예방했습니다.</p><div class="case-result">✅ 신속 대응으로 피해 최소화</div></div>
+      </div>
+      <div class="case-card">
+        <div class="case-header"><div class="case-num">CASE 04</div><h3>공실률 개선 임대관리</h3></div>
+        <div class="case-body"><p>공실률 30%에 달하던 오피스 빌딩의 임대 마케팅을 지원하고 임차인 관리 프로세스를 개선하여 임대 수익을 증대했습니다.</p><div class="case-result">✅ 6개월 내 공실률 5% 이하 달성</div></div>
+      </div>
+      <div class="case-card">
+        <div class="case-header"><div class="case-num">CASE 05</div><h3>CCTV 보안 인프라 구축</h3></div>
+        <div class="case-body"><p>보안 인프라가 전무했던 상가 건물에 CCTV를 무상 설치하고 경비 시스템을 도입하여 범죄 예방 환경을 조성했습니다.</p><div class="case-result">✅ 무상 설치 후 입주민 만족도 대폭 상승</div></div>
+      </div>
+      <div class="case-card">
+        <div class="case-header"><div class="case-num">CASE 06</div><h3>관리인 선출 및 위탁 전환</h3></div>
+        <div class="case-body"><p>자치 관리에서 위탁 관리로 전환을 희망하는 건물의 관리단 구성부터 위탁 계약까지 전 과정을 법적으로 지원했습니다.</p><div class="case-result">✅ 합법적 절차로 분쟁 없이 전환 완료</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 지사 현황 -->
+<section id="branches">
+  <div class="section-inner">
+    <div class="section-title">
+      <div class="tag">NETWORK</div>
+      <h2>전국 지사 현황</h2>
+      <p>전국 5개 지사를 통해 빠르고 균일한 서비스를 제공합니다.</p>
+    </div>
+    <div class="branches-grid">
+      <div class="branch-card"><div class="b-icon">🏛️</div><h3>본사</h3><p>경기도 성남시<br>분당구</p></div>
+      <div class="branch-card"><div class="b-icon">🗼</div><h3>서울지사</h3><p>서초구<br>강남대로</p></div>
+      <div class="branch-card"><div class="b-icon">⛰️</div><h3>강원지사</h3><p>강원도<br>원주시</p></div>
+      <div class="branch-card"><div class="b-icon">🌊</div><h3>전남지사</h3><p>전라남도<br>여수시</p></div>
+      <div class="branch-card"><div class="b-icon">🌴</div><h3>제주지사</h3><p>제주특별자치도<br>제주시</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 문의 -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-title">
+      <div class="tag">CONTACT</div>
+      <h2>무료 상담 문의</h2>
+      <p>건물 관리에 관한 모든 궁금증, 무료로 상담해 드립니다.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>지금 바로<br>상담받으세요</h3>
+        <p>25년 경력의 전문가가 직접 현장을 방문하여 무료 진단 후 맞춤 견적을 제공합니다. 부담 없이 문의하세요.</p>
+        <div class="contact-items">
+          <div class="contact-item"><div class="ci-icon">📞</div><div class="ci-text"><div class="label">대표전화</div><div class="val">1599-3039</div></div></div>
+          <div class="contact-item"><div class="ci-icon">☎️</div><div class="ci-text"><div class="label">상담전화</div><div class="val">02-508-3129</div></div></div>
+          <div class="contact-item"><div class="ci-icon">📍</div><div class="ci-text"><div class="label">본사</div><div class="val">경기도 성남시 분당구</div></div></div>
+          <div class="contact-item"><div class="ci-icon">⏰</div><div class="ci-text"><div class="label">상담시간</div><div class="val">평일 09:00 ~ 18:00</div></div></div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <h3>📋 온라인 견적 문의</h3>
+        <div class="form-row">
+          <div class="form-group"><label>성함 *</label><input type="text" placeholder="홍길동"></div>
+          <div class="form-group"><label>연락처 *</label><input type="tel" placeholder="010-0000-0000"></div>
+        </div>
+        <div class="form-group">
+          <label>건물 유형</label>
+          <select>
+            <option value="">선택해주세요</option>
+            <option>소형건물</option><option>상가건물</option><option>원룸건물</option>
+            <option>소형빌딩</option><option>중대형빌딩</option><option>기타상업공간</option>
+            <option>호텔</option><option>아파트</option><option>오피스텔</option>
+          </select>
+        </div>
+        <div class="form-group"><label>문의 내용</label><textarea placeholder="건물 위치, 규모, 문의 내용을 간략히 적어주세요."></textarea></div>
+        <button class="btn-submit">무료 상담 신청하기 →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 푸터 -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">
+        <img src="images/logo.png" alt="KAAMS 로고">
+        <div class="sub">Korea Asset Guarantee Management Co., Ltd.</div>
+      </div>
+    </div>
+    <div class="footer-info">
+      <div>대표자: <span>박철수</span></div>
+      <div>사업자번호: <span>215-81-87684</span></div>
+      <div>대표전화: <span>1599-3039</span> &nbsp;|&nbsp; 상담: <span>02-508-3129</span></div>
+      <div>본사: 경기도 성남시 분당구</div>
+    </div>
+    <div class="footer-info">
+      <div>서울지사 | 강원지사 | 전남지사 | 제주지사</div>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2024 KAAMS (주)한국자산보증관리. All Rights Reserved.</div>
+</footer>
+
+<!-- 플로팅 -->
+<div class="floating-cta">
+  <a class="fcta-btn fcta-call" href="tel:15993039">📞 1599-3039 전화상담</a>
+  <a class="fcta-btn fcta-kakao" href="#contact">💬 온라인 문의</a>
+</div>
+
+<script>
+window.addEventListener('scroll', () => {
+  const header = document.querySelector('header');
+  header.style.boxShadow = window.scrollY > 10
+    ? '0 4px 20px rgba(0,0,0,.15)'
+    : '0 2px 12px rgba(0,0,0,.1)';
+});
+document.querySelector('.btn-submit').addEventListener('click', () => {
+  const name = document.querySelector('input[type="text"]').value;
+  const tel = document.querySelector('input[type="tel"]').value;
+  if (!name || !tel) { alert('성함과 연락처를 입력해주세요.'); return; }
+  alert('문의가 접수되었습니다.\n빠른 시간 내에 연락드리겠습니다.\n\n대표전화: 1599-3039');
+});
+</script>
+</body>
+</html>
